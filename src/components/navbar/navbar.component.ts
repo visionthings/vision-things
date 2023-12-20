@@ -53,7 +53,7 @@ export class NavbarComponent implements OnInit {
   // Change language
   changeLanguage() {
     if (typeof window !== 'undefined') {
-      location.href = `https://vision-things.com${this.route.url}`;
+      location.href = `https://en.vision-things.com${this.route.url}`;
     }
   }
 
