@@ -8,7 +8,9 @@
     </div>
   </div>
   <div class="relative w-full h-full hidden md:block">
+    @if(primarySection !== {}){
     <img [ngSrc]="headerImage" alt="header" fill priority />
+    }
   </div>
 </header>
 <!-- Secondary Section -->
