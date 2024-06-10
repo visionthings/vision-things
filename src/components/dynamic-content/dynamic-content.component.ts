@@ -1,9 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { DynamicContentService } from '../../services/dynamic-content.service';
 import { NgOptimizedImage } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SuccessMessageComponent } from '../../shared/success-message/success-message.component';
 import { ErrorMessageComponent } from '../../shared/error-message/error-message.component';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-dynamic-content',
@@ -17,11 +19,12 @@ import { ErrorMessageComponent } from '../../shared/error-message/error-message.
   templateUrl: './dynamic-content.component.html',
   styleUrl: './dynamic-content.component.scss',
 })
-export class DynamicContentComponent implements OnInit {
+export class DynamicContentComponent implements OnChanges {
   @Input() id: string | null = null;
   constructor(
     private contentService: DynamicContentService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute
   ) {}
 
   contents: any = [];
@@ -58,7 +61,7 @@ export class DynamicContentComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.contentService.getPage(this.id).subscribe({
       next: (res: any) => {
         this.contents = res.contents;
